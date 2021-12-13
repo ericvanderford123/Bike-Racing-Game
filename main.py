@@ -1,5 +1,6 @@
 import pygame
 import random
+from random import randint
 
 pygame.init()
 
@@ -19,10 +20,10 @@ bike2 = pygame.transform.scale(bike2, (200, 150))
 
 finishingline = pygame.image.load("data/finishline.png").convert()
 finishingline = finishingline.subsurface(0, 360, 800, 400)
-
 finishingline = pygame.transform.rotate(finishingline, 90)
 finishingline = pygame.transform.scale(finishingline, (500, 1000))
-
+startingline = pygame.image.load("data/startingline.png").convert()
+startingline = pygame.transform.scale(startingline, (220, 340))
 #position of the first bike
 b1x=0
 b1y=100
@@ -38,11 +39,14 @@ def player(x,y):
     window.blit(bike2,(x,y))
 def finish():
     window.blit(finishingline, (x,y))
+def starting():
+    window.blit(startingline, (0, 0))
 start=True
 
 while start:
     window.blit(background, (0,0))
     finish()
+    starting()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             start = False
@@ -58,5 +62,8 @@ while start:
     b2x = b2x + b2change
     player(b1x,b1y)
     player(b2x,b2y)
+
     pygame.display.update()
-    
+
+
+

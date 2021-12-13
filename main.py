@@ -41,28 +41,48 @@ def finish():
     window.blit(finishingline, (x,y))
 def starting():
     window.blit(startingline, (0, 0))
-start=True
+gamestate='Running'
 
-while start:
+
+while (gamestate == 'Running' ) or (gamestate == 'notrunning'):
     window.blit(background, (0,0))
     finish()
     starting()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            start = False
+            print('gamesate quit')
+            gamestate = 'quit'
             pygame.quit()
             quit()
 
 
-    move1=random.randint(0,4)
-    move2 = random.randint(0, 4)
-    b1change=move1
-    b2change = move2
-    b1x= b1x+ b1change
-    b2x = b2x + b2change
-    player(b1x,b1y)
-    player(b2x,b2y)
+    if gamestate == 'Running':
+        move1=random.randint(0,4)
+        move2 = random.randint(0, 4)
+        b1change=move1
+        b2change = move2
+        b1x= b1x+ b1change
+        b2x = b2x + b2change
+        player(b1x,b1y)
+        player(b2x,b2y)
 
+        if b1x >=880:
+            print('gamestate notrunning')
+            gamestate='notrunning'
+        if b2x >= 880:
+            print('gamestate notrunning')
+            gamestate = 'notrunning'
+    if gamestate =='notrunning':
+        white = (255, 255, 255)
+        green = (0, 255, 0)
+        blue = (0, 0, 128)
+        pygame.display.set_caption('Show Text')
+        font = pygame.font.Font('freesansbold.ttf', 32)
+        text = font.render('Player 1 Wins', True, green, blue)
+        textRect = text.get_rect()
+
+        # set the center of the rectangular object.
+        textRect.center = (x // 2, y // 2)
     pygame.display.update()
 
 

@@ -85,10 +85,8 @@ while (gamestate == 'Running' ) or (gamestate == 'notrunning1')or (gamestate == 
     if gamestate == 'Running':
         move1=random.randint(0,4)
         move2 = random.randint(0, 4)
-        b1change=move1
-        b2change = move2
-        b1x= b1x+ b1change
-        b2x = b2x + b2change
+        b1x= b1x+ move1
+        b2x = b2x + move2
         player(b1x,b1y)
         player(b2x,b2y)
 
